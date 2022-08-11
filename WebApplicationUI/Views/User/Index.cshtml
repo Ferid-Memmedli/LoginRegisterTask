@@ -1,0 +1,67 @@
+﻿@using SharedLayer.Constants
+@model UserViewModel
+
+@{
+    ViewData["Title"] = "Users Page";
+}
+
+<div class="card mb-4">
+
+    <div class="card-header">
+        <div style="display:flex;" class="col justify-content-start">
+            Users
+        </div>
+    </div>
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(p=>p.Users.GetEnumerator().Current.UserName)</th>
+                        <th>@Html.DisplayNameFor(p=>p.Users.GetEnumerator().Current.Email)</th>
+                        <th>@Html.DisplayNameFor(p=>p.Users.GetEnumerator().Current.PhoneNumber)</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="tablebody">
+                    @foreach (var user in Model.Users)
+                    {
+                        <tr name="@user.Id">
+                            <td>@user.UserName</td>
+                            <td>@user.Email</td>
+                            <td>@user.PhoneNumber</td>
+                            <td>
+                                @if (User.IsInRole(RoleConstant.Admin))
+                                {
+                                <a class='btn text-primary btn-sm btn-detail' title="detail" onclick="showInPopup('/User/Detail/@user.Id', 'Detail')" data-id="@user.Id"><i class="fa fa-eye fa-spin"></i> </a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<div id="form-modal" class="modal fade" role="dialog" aria-hidden="true" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="modalbody" class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+    {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

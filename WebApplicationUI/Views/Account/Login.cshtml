@@ -1,0 +1,41 @@
+﻿@model UserLogin
+@{
+    Layout = "_LoginLayout";
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-5">
+        <div class="card shadow-lg border-0 rounded-lg mt-5">
+            <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
+            <div class="card-body">
+                <form asp-action="login" asp-controller="account" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <label class="small mb-1" asp-for="Email"> </label>
+                        <input class="form-control py-4" asp-for="Email" type="email" placeholder="Enter email address" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="small mb-1" asp-for="Password"></label>
+                        <input class="form-control py-4" asp-for="Password" type="password" placeholder="Enter password" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" asp-for="RememberMe" />
+                            <label class="custom-control-label" asp-for="RememberMe"></label>
+                        </div>
+                    </div>
+                    <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer text-center">
+                <div class="small"><a asp-action="register"  asp-controller="account">Need an account? Sign up!</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+

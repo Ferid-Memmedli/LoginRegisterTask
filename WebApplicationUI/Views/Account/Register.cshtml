@@ -1,0 +1,68 @@
+﻿@model EntitiesLayer.Concrete.Identity.User
+@{
+    Layout = "_LoginLayout";
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-5">
+        <div class="card shadow-lg border-0 rounded-lg mt-5">
+            <div class="card-header"><h3 class="text-center font-weight-light my-4">Register</h3></div>
+            <div class="card-body">
+                <form asp-action="register" asp-controller="account" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <label asp-for=" UserName"></label>
+                        <input asp-for=" UserName" class="form-control" autocomplete="off" />
+                        <span asp-validation-for=" UserName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for=" FirstName"></label>
+                        <input asp-for=" FirstName" class="form-control" autocomplete="off" />
+                        <span asp-validation-for=" FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for=" LastName"></label>
+                        <input asp-for=" LastName" class="form-control" autocomplete="off" />
+                        <span asp-validation-for=" LastName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="small mb-1" asp-for=" Email"> </label>
+                        <input class="form-control py-4" asp-for=" Email" type="email" placeholder="Enter email address" />
+                        <span asp-validation-for=" Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="small mb-1" asp-for=" Password"></label>
+                        <input class="form-control py-4" asp-for=" Password" type="password" placeholder="Enter password" />
+                        <span asp-validation-for=" Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="small mb-1" asp-for="PhoneNumber"></label>
+                        <input class="form-control py-4" asp-for="PhoneNumber" placeholder="Enter Phone Number" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" id="parent">
+                        <label class="small mb-1" name="addresses">Address</label>
+                        <input id="address" class="form-control py-4 mt-1" name="addresses" />
+                    </div>
+                    <button type="button" id="copyInput" class="btn btn-primary">Address Add</button>
+
+                    <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+                        <button type="submit" class="btn btn-primary">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    const element = document.getElementById("copyInput");
+    element.addEventListener("click", addInput);
+
+    function addInput() {
+        const input = document.getElementById("address");
+        const clone = input.cloneNode(true);
+        document.getElementById("parent").appendChild(clone);
+    }
+
+</script>
